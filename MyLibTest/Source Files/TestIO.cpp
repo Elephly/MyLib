@@ -60,8 +60,15 @@ void TestIO::displayProcedure(TestProcedure *procedure)
 	cout << procedure->getTitle() << endl;
 }
 
+void TestIO::displayMessage(char *message)
+{
+	cout << message << endl;
+	askForAcknowledgement();
+}
+
 int TestIO::askForInteger()
 {
+	cout << "Enter an integer: ";
 	return requestInteger();
 }
 
@@ -77,9 +84,27 @@ char *TestIO::askForString()
 	return requestString();
 }
 
+void TestIO::askForAcknowledgement()
+{
+	cout << endl << "Press enter to continue.";
+	requestAcknowledgement();
+}
+
 int TestIO::requestInteger()
 {
-	return 0;
+	int success = 0;
+	int in;
+	while (success != 1)
+	{
+		success = scanf_s("%d", &in);
+		while (getchar() != '\n');
+
+		if (success != 1)
+		{
+			printf("Invalid input. Try again: ");
+		}
+	}
+	return in;
 }
 
 int TestIO::requestInteger(int min, int max)
@@ -99,9 +124,29 @@ int TestIO::requestInteger(int min, int max)
 
  char *TestIO::requestString()
  {
-	 char *in = "";
-	 scanf_s("%s", &in);
-	 return in;
+	 int i = 1;
+	 char *out = (char *)calloc(i, sizeof(char));
+	 out[i - 1] = '\0';
+	 char in;
+
+	 do
+	 {
+		 in = (char)getchar();
+		 if (in != '\n')
+		 {
+			 char *tmp = out;
+			 out = (char *)calloc(++i, sizeof(char));
+			 if (tmp)
+			 {
+				 strcpy(out, tmp);
+				 free(tmp);
+			 }
+			 out[i - 2] = in;
+			 out[i - 1] = '\0';
+		 }
+	 } while (in != '\n');
+
+	 return out;
  }
 
  void TestIO::requestAcknowledgement()

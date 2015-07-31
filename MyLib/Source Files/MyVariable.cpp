@@ -47,6 +47,8 @@ namespace MyLib
 		case UInt8:
 			os << "UInt8";
 			break;
+		case Missing:
+			os << "Missing";
 		default:
 			break;
 		}

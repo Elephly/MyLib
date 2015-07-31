@@ -16,7 +16,7 @@ void TestProcedure::invoke(TestIO *view)
 {
 	view->displayProcedure(this);
 	doProcedure(view);
-	view->requestAcknowledgement();
+	view->askForAcknowledgement();
 	if (parent != 0)
 	{
 		parent->enter(view);

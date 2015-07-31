@@ -18,10 +18,12 @@ public:
 	
 	int displayMenu(TestMenu *menu);
 	void displayProcedure(TestProcedure *procedure);
+	void displayMessage(char *message);
 
 	int askForInteger();
 	int askForInteger(int min, int max);
 	char *askForString();
+	void askForAcknowledgement();
 
 	int requestInteger();
 	int requestInteger(int min, int max);
